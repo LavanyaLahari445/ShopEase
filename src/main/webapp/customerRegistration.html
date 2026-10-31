@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Registration</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #e0eafc, #cfdef3);
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .registration-container {
+            background-color: white;
+            width: 420px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        h2 {
+            text-align: center;
+            color: #243b55;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            color: #333;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 11px;
+            margin-bottom: 17px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 4px rgba(37, 99, 235, 0.3);
+        }
+
+        input[type="submit"] {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 5px;
+            margin-bottom: 0;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #1d4ed8;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 13px;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="registration-container">
+
+        <h2>Customer Registration</h2>
+        <p class="subtitle">Create your customer account</p>
+
+        <form action="register" method="post">
+
+            <label for="uname">Username</label>
+            <input type="text" id="uname" name="uname"
+                   placeholder="Enter your username" required>
+
+            <label for="pwd">Password</label>
+            <input type="password" id="pwd" name="pwd"
+                   placeholder="Enter your password" required>
+
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" name="fname"
+                   placeholder="Enter your first name" required>
+
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" name="lname"
+                   placeholder="Enter your last name" required>
+
+            <label for="addr">Address</label>
+            <input type="text" id="addr" name="addr"
+                   placeholder="Enter your address" required>
+
+            <label for="mailid">Email Address</label>
+            <input type="email" id="mailid" name="mailid"
+                   placeholder="Enter your email address" required>
+
+            <input type="submit" value="Register">
+
+        </form>
+
+        <div class="footer">
+            Please enter your details to register.
+        </div>
+
+    </div>
+
+</body>
+</html>

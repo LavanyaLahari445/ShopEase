@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Login | ShopEase</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f4f7fb;
+            color: #172033;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+
+        .header {
+            min-height: 76px;
+            padding: 0 8%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            background: #ffffff;
+            border-bottom: 1px solid #e8edf4;
+        }
+
+        .brand {
+            text-decoration: none;
+            color: #172b4d;
+            font-size: 29px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .brand span,
+        .brand i {
+            color: #246bfd;
+        }
+
+        .brand i {
+            margin-right: 7px;
+        }
+
+        .header-home {
+            text-decoration: none;
+            color: #475569;
+            font-size: 14px;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .header-home:hover {
+            color: #246bfd;
+        }
+
+        .header-home i {
+            margin-right: 6px;
+        }
+
+        /* Main Layout */
+
+        .main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 55px 20px;
+        }
+
+        .login-wrapper {
+            width: 100%;
+            max-width: 1000px;
+            min-height: 550px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: #ffffff;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(23, 43, 77, 0.09);
+        }
+
+        /* Welcome Panel */
+
+        .welcome-panel {
+            background: linear-gradient(145deg, #12264a, #1e4382);
+            color: #ffffff;
+            padding: 55px 42px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-panel::before {
+            content: "";
+            width: 260px;
+            height: 260px;
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            border-radius: 50%;
+            position: absolute;
+            top: -90px;
+            right: -90px;
+        }
+
+        .welcome-panel::after {
+            content: "";
+            width: 220px;
+            height: 220px;
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            border-radius: 50%;
+            position: absolute;
+            bottom: -100px;
+            left: -80px;
+        }
+
+        .welcome-icon {
+            width: 76px;
+            height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.20);
+            border-radius: 18px;
+            font-size: 35px;
+            margin-bottom: 30px;
+        }
+
+        .welcome-panel h1 {
+            font-size: 35px;
+            line-height: 1.25;
+            margin-bottom: 20px;
+            letter-spacing: -0.8px;
+        }
+
+        .welcome-panel h1 span {
+            color: #83b4ff;
+        }
+
+        .welcome-panel > p {
+            color: #d2def0;
+            font-size: 15px;
+            line-height: 1.9;
+            margin-bottom: 35px;
+        }
+
+        .benefit {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 17px;
+            font-size: 14px;
+            color: #edf4ff;
+        }
+
+        .benefit i {
+            color: #8fc5ff;
+            font-size: 18px;
+        }
+
+        /* Login Form Panel */
+
+        .form-panel {
+            padding: 55px 45px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-heading {
+            margin-bottom: 32px;
+        }
+
+        .form-heading .eyebrow {
+            color: #246bfd;
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+        }
+
+        .form-heading h2 {
+            color: #172b4d;
+            font-size: 29px;
+            margin-bottom: 10px;
+            letter-spacing: -0.6px;
+        }
+
+        .form-heading p {
+            color: #7b879b;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* Input Fields */
+
+        .form-group {
+            margin-bottom: 23px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            color: #34425b;
+            margin-bottom: 9px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper > i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #8794a9;
+            font-size: 17px;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            height: 49px;
+            padding: 0 15px 0 44px;
+            border: 1px solid #dce3ed;
+            border-radius: 8px;
+            outline: none;
+            background: #fbfcfe;
+            color: #172033;
+            font-size: 14px;
+            transition: 0.25s;
+        }
+
+        .input-wrapper input::placeholder {
+            color: #a0aabd;
+        }
+
+        .input-wrapper input:focus {
+            background: #ffffff;
+            border-color: #246bfd;
+            box-shadow: 0 0 0 4px rgba(36, 107, 253, 0.09);
+        }
+
+        /* Login Button */
+
+        .login-button {
+            width: 100%;
+            min-height: 50px;
+            border: none;
+            border-radius: 8px;
+            background: #246bfd;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 5px;
+            transition: background 0.25s, transform 0.25s;
+        }
+
+        .login-button:hover {
+            background: #1756dc;
+            transform: translateY(-1px);
+        }
+
+        .login-button i {
+            margin-left: 8px;
+        }
+
+        .security-note {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 7px;
+            margin-top: 23px;
+            color: #8a96a9;
+            font-size: 12px;
+        }
+
+        .security-note i {
+            color: #15966a;
+        }
+
+        .back-home {
+            display: block;
+            margin-top: 23px;
+            text-align: center;
+            text-decoration: none;
+            color: #64748b;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .back-home:hover {
+            color: #246bfd;
+        }
+
+        .back-home i {
+            margin-right: 5px;
+        }
+
+        /* Footer */
+
+        .footer {
+            background: #ffffff;
+            border-top: 1px solid #e8edf4;
+            padding: 22px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            color: #8290a5;
+            font-size: 12px;
+        }
+
+        .footer p {
+            margin: 0;
+        }
+
+        .footer strong {
+            color: #34425b;
+        }
+
+        /* Responsive Design */
+
+        @media (max-width: 760px) {
+            .header {
+                padding: 15px 5%;
+            }
+
+            .main {
+                padding: 30px 16px;
+            }
+
+            .login-wrapper {
+                max-width: 480px;
+                grid-template-columns: 1fr;
+            }
+
+            .welcome-panel {
+                padding: 35px 30px;
+            }
+
+            .welcome-panel h1 {
+                font-size: 29px;
+            }
+
+            .welcome-panel > p {
+                margin-bottom: 20px;
+            }
+
+            .benefit {
+                margin-bottom: 12px;
+            }
+
+            .form-panel {
+                padding: 38px 30px;
+            }
+
+            .footer {
+                justify-content: center;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .brand {
+                font-size: 24px;
+            }
+
+            .header-home {
+                font-size: 12px;
+            }
+
+            .welcome-panel,
+            .form-panel {
+                padding-left: 22px;
+                padding-right: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+
+    <header class="header">
+
+        <a href="index.html" class="brand">
+            <i class="bi bi-bag-check-fill"></i>Shop<span>Ease</span>
+        </a>
+
+        <a href="index.html" class="header-home">
+            <i class="bi bi-arrow-left"></i> Back to Home
+        </a>
+
+    </header>
+
+    <!-- Main Login Area -->
+
+    <main class="main">
+
+        <div class="login-wrapper">
+
+            <!-- Welcome Panel -->
+
+            <section class="welcome-panel">
+
+                <div class="welcome-icon">
+                    <i class="bi bi-shop-window"></i>
+                </div>
+
+                <h1>
+                    Welcome to<br>
+                    <span>ShopEase Admin</span>
+                </h1>
+
+                <p>
+                    Your central workspace for managing your online store.
+                    Sign in to access your administration portal and manage
+                    your products efficiently.
+                </p>
+
+                <div class="benefit">
+                    <i class="bi bi-check-circle-fill"></i>
+                    <span>Manage products and inventory</span>
+                </div>
+
+                <div class="benefit">
+                    <i class="bi bi-check-circle-fill"></i>
+                    <span>Maintain product information</span>
+                </div>
+
+                <div class="benefit">
+                    <i class="bi bi-check-circle-fill"></i>
+                    <span>Keep your store organized</span>
+                </div>
+
+            </section>
+
+            <!-- Login Form -->
+
+            <section class="form-panel">
+
+                <div class="form-heading">
+
+                    <p class="eyebrow">Administration Portal</p>
+
+                    <h2>Admin Sign In</h2>
+
+                    <p>
+                        Enter your administrator credentials
+                        to continue.
+                    </p>
+
+                </div>
+
+                <form action="AdminLogin" method="post">
+
+                    <div class="form-group">
+
+                        <label for="uname">Username</label>
+
+                        <div class="input-wrapper">
+
+                            <i class="bi bi-person"></i>
+
+                            <input
+                                type="text"
+                                id="uname"
+                                name="uname"
+                                placeholder="Enter your username"
+                                autocomplete="username"
+                                required>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="upwd">Password</label>
+
+                        <div class="input-wrapper">
+
+                            <i class="bi bi-lock"></i>
+
+                            <input
+                                type="password"
+                                id="upwd"
+                                name="upwd"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required>
+
+                        </div>
+
+                    </div>
+
+                    <button type="submit" class="login-button">
+                        Sign In to Dashboard
+                        <i class="bi bi-arrow-right"></i>
+                    </button>
+
+                </form>
+
+                <div class="security-note">
+                    <i class="bi bi-shield-lock-fill"></i>
+                    Secure administrator access
+                </div>
+
+                <a href="index.html" class="back-home">
+                    <i class="bi bi-house"></i>
+                    Return to ShopEase Home
+                </a>
+
+            </section>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+
+    <footer class="footer">
+
+        <p>
+            &copy; 2026 <strong>ShopEase</strong>. All rights reserved.
+        </p>
+
+        <p>
+            Designed &amp; Developed by <strong>Lahari</strong>
+        </p>
+
+    </footer>
+
+</body>
+</html>

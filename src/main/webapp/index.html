@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ShopEase | Online Shopping System</title>
+    <meta name="description" content="ShopEase online shopping and product management portal.">
+
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #eff6ff;
+            --heading: #172554;
+            --text: #475569;
+            --muted: #64748b;
+            --background: #f8fafc;
+            --border: #e2e8f0;
+            --green: #059669;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', Arial, sans-serif;
+            color: #1e293b;
+            background: var(--background);
+            font-size: 15px;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--heading);
+            font-family: 'Inter', Arial, sans-serif;
+            line-height: 1.3;
+            letter-spacing: -0.5px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 1160px;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1030;
+            padding: 13px 0;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 3px 18px rgba(15, 23, 42, 0.05);
+            backdrop-filter: blur(12px);
+        }
+
+        .navbar-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            color: var(--heading);
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .navbar-brand i {
+            color: var(--primary);
+            font-size: 28px;
+        }
+
+        .navbar-brand span,
+        .sidebar-title span {
+            color: var(--primary);
+        }
+
+        .navbar-brand:hover {
+            color: var(--heading);
+        }
+
+        .navbar .nav-link {
+            padding: 10px 12px;
+            color: #334155;
+            font-size: 14px;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .navbar .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .navbar .nav-login {
+            margin-left: 8px;
+            padding: 11px 18px;
+            border-radius: 9px;
+            color: white;
+            background: var(--primary);
+        }
+
+        .navbar .nav-login:hover {
+            color: white;
+            background: var(--primary-dark);
+        }
+
+        .navbar-toggler {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 46px;
+            height: 44px;
+            padding: 0;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: white;
+            box-shadow: none !important;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .navbar-toggler i {
+            color: var(--heading);
+            font-size: 28px;
+        }
+
+        /* MOBILE SIDEBAR */
+
+        .mobile-sidebar {
+            width: 320px !important;
+            max-width: 88vw;
+            border: none;
+        }
+
+        .mobile-sidebar .offcanvas-header {
+            padding: 22px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .sidebar-title {
+            margin: 0;
+            font-size: 23px;
+            font-weight: 800;
+        }
+
+        .sidebar-title i {
+            color: var(--primary);
+        }
+
+        .mobile-sidebar .offcanvas-body {
+            display: flex;
+            flex-direction: column;
+            padding: 22px;
+        }
+
+        .sidebar-label {
+            margin-bottom: 15px;
+            color: #94a3b8;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+        }
+
+        .sidebar-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .sidebar-links a {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            min-height: 48px;
+            padding: 12px 14px;
+            border-radius: 10px;
+            color: #334155;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.2s, color 0.2s;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .sidebar-links a i {
+            color: var(--primary);
+            font-size: 20px;
+        }
+
+        .sidebar-links a:hover,
+        .sidebar-links a:focus-visible {
+            color: var(--primary-dark);
+            background: var(--primary-light);
+        }
+
+        .sidebar-links .sidebar-login {
+            margin-top: 5px;
+            color: white;
+            background: var(--primary);
+        }
+
+        .sidebar-links .sidebar-login i {
+            color: white;
+        }
+
+        .sidebar-links .sidebar-login:hover {
+            color: white;
+            background: var(--primary-dark);
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            padding-top: 30px;
+            color: var(--muted);
+            text-align: center;
+        }
+
+        .sidebar-footer i {
+            color: var(--primary);
+            font-size: 38px;
+        }
+
+        .sidebar-footer p {
+            margin: 5px 0 0;
+            font-size: 13px;
+        }
+
+        /* HERO */
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: 80px 0;
+            background: linear-gradient(120deg, #eff6ff 0%, #e0eaff 55%, #eef2ff 100%);
+        }
+
+        .hero::before {
+            position: absolute;
+            top: -130px;
+            right: -110px;
+            width: 340px;
+            height: 340px;
+            border-radius: 50%;
+            background: rgba(96, 165, 250, 0.13);
+            content: "";
+        }
+
+        .hero::after {
+            position: absolute;
+            bottom: -130px;
+            left: -120px;
+            width: 230px;
+            height: 230px;
+            border-radius: 50%;
+            background: rgba(129, 140, 248, 0.12);
+            content: "";
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 23px;
+            padding: 7px 14px;
+            border: 1px solid #bfdbfe;
+            border-radius: 30px;
+            color: var(--primary-dark);
+            background: rgba(255, 255, 255, 0.75);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .hero h1 {
+            margin-bottom: 23px;
+            color: var(--heading);
+            font-size: clamp(36px, 4.5vw, 56px);
+            font-weight: 800;
+            letter-spacing: -1.8px;
+            line-height: 1.15;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero-description {
+            max-width: 590px;
+            margin-bottom: 30px;
+            color: var(--text);
+            font-size: 16px;
+            line-height: 1.85;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .hero-btn,
+        .hero-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 22px;
+            border: 1px solid transparent;
+            border-radius: 9px;
+            font-size: 14px;
+            font-weight: 700;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .hero-btn {
+            border-color: var(--primary);
+            color: white;
+            background: var(--primary);
+        }
+
+        .hero-btn:hover {
+            color: white;
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .hero-secondary {
+            border-color: #cbd5e1;
+            color: var(--heading);
+            background: rgba(255, 255, 255, 0.6);
+        }
+
+        .hero-secondary:hover {
+            color: var(--heading);
+            background: white;
+        }
+
+        .hero-visual {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 340px;
+        }
+
+        .visual-circle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: min(290px, 75vw);
+            aspect-ratio: 1;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            background: linear-gradient(145deg, #ffffff, #dbeafe);
+            box-shadow: 0 25px 65px rgba(37, 99, 235, 0.15);
+        }
+
+        .visual-circle i {
+            color: var(--primary);
+            font-size: 125px;
+        }
+
+        .floating-card {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 13px 16px;
+            border: 1px solid #e5edfb;
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.09);
+        }
+
+        .floating-card > i {
+            display: flex;
+            flex-shrink: 0;
+            align-items: center;
+            justify-content: center;
+            width: 39px;
+            height: 39px;
+            border-radius: 10px;
+            color: var(--primary);
+            background: #dbeafe;
+            font-size: 21px;
+        }
+
+        .floating-card strong,
+        .floating-card small {
+            display: block;
+        }
+
+        .floating-card strong {
+            color: var(--heading);
+            font-size: 12px;
+        }
+
+        .floating-card small {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .floating-one {
+            top: 37px;
+            right: -2px;
+        }
+
+        .floating-two {
+            bottom: 36px;
+            left: -3px;
+        }
+
+        /* COMMON SECTIONS */
+
+        .page-section {
+            padding: 80px 0;
+            scroll-margin-top: 80px;
+        }
+
+        .section-heading {
+            max-width: 680px;
+            margin: 0 auto 45px;
+            text-align: center;
+        }
+
+        .section-tag {
+            display: inline-block;
+            margin-bottom: 12px;
+            color: var(--primary);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1.6px;
+            text-transform: uppercase;
+        }
+
+        .section-heading h2 {
+            margin-bottom: 13px;
+            color: var(--heading);
+            font-size: clamp(28px, 3.5vw, 36px);
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .section-heading p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        /* LOGIN */
+
+        #login {
+            background: white;
+        }
+
+        .login-card {
+            height: 100%;
+            padding: 35px 30px;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: white;
+            box-shadow: 0 5px 20px rgba(15, 23, 42, 0.035);
+            text-align: center;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+
+        .login-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 38px rgba(15, 23, 42, 0.09);
+        }
+
+        .icon-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 76px;
+            height: 76px;
+            margin: 0 auto 22px;
+            border-radius: 20px;
+            color: var(--primary);
+            background: #dbeafe;
+            font-size: 35px;
+        }
+
+        .customer-icon {
+            color: var(--green);
+            background: #d1fae5;
+        }
+
+        .login-card h3 {
+            margin-bottom: 12px;
+            color: var(--heading);
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .login-card p {
+            min-height: 75px;
+            margin-bottom: 25px;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .login-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            padding: 14px 15px;
+            border-radius: 9px;
+            color: white;
+            font-size: 14px;
+            font-weight: 700;
+            transition: background 0.2s;
+        }
+
+        .admin-btn {
+            background: var(--primary);
+        }
+
+        .admin-btn:hover {
+            color: white;
+            background: var(--primary-dark);
+        }
+
+        .customer-btn {
+            background: var(--green);
+        }
+
+        .customer-btn:hover {
+            color: white;
+            background: #047857;
+        }
+
+        /* SERVICES */
+
+        .feature-card {
+            height: 100%;
+            padding: 29px 25px;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: white;
+            transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #bfdbfe;
+            box-shadow: 0 14px 30px rgba(15, 23, 42, 0.06);
+        }
+
+        .feature-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 53px;
+            height: 53px;
+            margin-bottom: 21px;
+            border-radius: 14px;
+            color: var(--primary);
+            background: var(--primary-light);
+            font-size: 27px;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 10px;
+            color: var(--heading);
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            margin-bottom: 0;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        /* ABOUT */
+
+        #about {
+            background: white;
+        }
+
+        .about-panel {
+            padding: 40px;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background: linear-gradient(135deg, #ffffff, #f8fbff);
+            box-shadow: 0 8px 28px rgba(15, 23, 42, 0.035);
+        }
+
+        .about-content p {
+            margin-bottom: 17px;
+            color: var(--text);
+            font-size: 15px;
+            line-height: 1.9;
+        }
+
+        .about-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 230px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #dbeafe, #eef2ff);
+        }
+
+        .about-visual i {
+            color: var(--primary);
+            font-size: 100px;
+        }
+
+        .highlight {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            height: 100%;
+            padding: 14px;
+            border-radius: 10px;
+            color: var(--primary-dark);
+            background: #eff6ff;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .highlight i {
+            flex-shrink: 0;
+            font-size: 19px;
+        }
+
+        /* CONTACT */
+
+        #contact {
+            background: #f1f5f9;
+        }
+
+        .contact-card {
+            height: 100%;
+            padding: 30px 22px;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: white;
+            text-align: center;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.07);
+        }
+
+        .contact-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 59px;
+            height: 59px;
+            margin: 0 auto 18px;
+            border-radius: 16px;
+            color: var(--primary);
+            background: var(--primary-light);
+            font-size: 27px;
+        }
+
+        .contact-card h3 {
+            margin-bottom: 10px;
+            color: var(--heading);
+            font-size: 19px;
+            font-weight: 700;
+        }
+
+        .contact-card p {
+            margin-bottom: 12px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .contact-link {
+            display: inline-block;
+            color: var(--primary);
+            font-size: 13px;
+            font-weight: 700;
+            overflow-wrap: anywhere;
+        }
+
+        .contact-link:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
+        /* FOOTER */
+
+        footer {
+            padding: 50px 0 22px;
+            color: #cbd5e1;
+            background: #101d3a;
+        }
+
+        .footer-about h2 {
+            margin-bottom: 16px;
+            color: white;
+            font-size: 26px;
+            font-weight: 800;
+        }
+
+        .footer-about h2 span {
+            color: #60a5fa;
+        }
+
+        .footer-about p {
+            max-width: 390px;
+            color: #aebdd4;
+            font-size: 13px;
+            line-height: 1.9;
+        }
+
+        .footer-links h3 {
+            margin-bottom: 18px;
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .footer-links a {
+            display: block;
+            width: fit-content;
+            margin-bottom: 10px;
+            color: #cbd5e1;
+            font-size: 13px;
+            line-height: 1.9;
+        }
+
+        .footer-links a:hover {
+            color: #93c5fd;
+        }
+
+        .footer-bottom {
+            margin-top: 24px;
+            padding-top: 22px;
+            border-top: 1px solid #2b3b58;
+            color: #aebdd4;
+            font-size: 12px;
+            line-height: 1.9;
+            text-align: center;
+        }
+
+        .footer-bottom span {
+            color: #93c5fd;
+            font-weight: 700;
+        }
+
+        /* ACCESSIBILITY */
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 3px solid #93c5fd;
+            outline-offset: 4px;
+        }
+
+        /* TABLET */
+
+        @media (max-width: 991.98px) {
+            .desktop-nav {
+                display: none !important;
+            }
+
+            .hero {
+                padding: 65px 0;
+            }
+
+            .hero-visual {
+                min-height: 290px;
+            }
+
+            .floating-one {
+                right: 5%;
+            }
+
+            .floating-two {
+                left: 5%;
+            }
+        }
+
+        /* DESKTOP */
+
+        @media (min-width: 992px) {
+            .navbar-toggler,
+            .mobile-sidebar {
+                display: none !important;
+            }
+
+            .desktop-nav {
+                display: flex !important;
+            }
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 575.98px) {
+            body {
+                font-size: 14px;
+            }
+
+            .navbar {
+                padding: 11px 0;
+            }
+
+            .navbar-brand {
+                font-size: 23px;
+            }
+
+            .navbar-brand i {
+                font-size: 25px;
+            }
+
+            .page-section {
+                padding: 58px 0;
+            }
+
+            .hero {
+                padding: 50px 0 42px;
+                text-align: center;
+            }
+
+            .hero h1 {
+                margin-bottom: 18px;
+                font-size: clamp(32px, 8.5vw, 39px);
+                line-height: 1.2;
+                letter-spacing: -1.1px;
+            }
+
+            .hero-description {
+                margin-right: auto;
+                margin-left: auto;
+                font-size: 14px;
+                line-height: 1.85;
+            }
+
+            .hero-actions {
+                justify-content: center;
+            }
+
+            .hero-btn,
+            .hero-secondary {
+                width: 100%;
+                min-height: 48px;
+            }
+
+            .hero-visual {
+                min-height: 260px;
+            }
+
+            .visual-circle {
+                width: 210px;
+            }
+
+            .visual-circle i {
+                font-size: 90px;
+            }
+
+            .floating-card {
+                gap: 8px;
+                padding: 9px 10px;
+            }
+
+            .floating-card > i {
+                width: 32px;
+                height: 32px;
+                font-size: 17px;
+            }
+
+            .floating-card strong {
+                font-size: 10px;
+            }
+
+            .floating-card small {
+                font-size: 9px;
+            }
+
+            .floating-one {
+                top: 15px;
+                right: 0;
+            }
+
+            .floating-two {
+                bottom: 12px;
+                left: 0;
+            }
+
+            .section-heading {
+                margin-bottom: 32px;
+            }
+
+            .section-heading h2 {
+                font-size: 28px;
+                letter-spacing: -0.7px;
+            }
+
+            .section-heading p {
+                font-size: 14px;
+            }
+
+            .login-card {
+                padding: 29px 22px;
+            }
+
+            .login-card h3 {
+                font-size: 21px;
+            }
+
+            .login-card p {
+                min-height: auto;
+                font-size: 14px;
+            }
+
+            .login-btn {
+                min-height: 48px;
+            }
+
+            .feature-card {
+                padding: 24px 21px;
+            }
+
+            .feature-card h3 {
+                font-size: 17px;
+            }
+
+            .feature-card p {
+                font-size: 14px;
+            }
+
+            .about-panel {
+                padding: 21px;
+            }
+
+            .about-content p {
+                font-size: 14px;
+            }
+
+            .about-visual {
+                min-height: 175px;
+            }
+
+            .about-visual i {
+                font-size: 75px;
+            }
+
+            .highlight {
+                font-size: 12px;
+            }
+
+            .contact-card {
+                padding: 27px 20px;
+            }
+
+            .contact-card h3 {
+                font-size: 18px;
+            }
+
+            .contact-card p,
+            .contact-link {
+                font-size: 13px;
+            }
+
+            footer {
+                padding-top: 40px;
+            }
+
+            .footer-about h2 {
+                font-size: 24px;
+            }
+        }
+
+        /* SMALL PHONES */
+
+        @media (max-width: 380px) {
+            .navbar-brand {
+                font-size: 21px;
+            }
+
+            .navbar-toggler {
+                width: 42px;
+                height: 42px;
+            }
+
+            .mobile-sidebar {
+                max-width: 90vw;
+            }
+
+            .mobile-sidebar .offcanvas-body {
+                padding: 18px;
+            }
+        }
+
+        /* REDUCED MOTION */
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+
+            <a class="navbar-brand" href="#home">
+                <i class="bi bi-bag-check-fill"></i>
+                Shop<span>Ease</span>
+            </a>
+
+            <button class="navbar-toggler d-lg-none"
+                    type="button"
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#mobileSidebar"
+                    aria-controls="mobileSidebar"
+                    aria-label="Open navigation menu">
+
+                <i class="bi bi-list"></i>
+            </button>
+
+            <div class="collapse navbar-collapse desktop-nav">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#login">Login</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Services</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About Us</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact Us</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="CustomerLogin.html" class="nav-link nav-login">
+                            Get Started <i class="bi bi-arrow-up-right"></i>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+    <!-- MOBILE SIDEBAR -->
+    <div class="offcanvas offcanvas-end mobile-sidebar"
+         tabindex="-1"
+         id="mobileSidebar"
+         aria-labelledby="mobileSidebarLabel">
+
+        <div class="offcanvas-header">
+
+            <h5 class="sidebar-title" id="mobileSidebarLabel">
+                <i class="bi bi-bag-check-fill"></i>
+                Shop<span>Ease</span>
+            </h5>
+
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="offcanvas"
+                    aria-label="Close menu">
+            </button>
+
+        </div>
+
+        <div class="offcanvas-body">
+
+            <p class="sidebar-label">MAIN MENU</p>
+
+            <div class="sidebar-links">
+
+                <a href="#home" class="sidebar-link">
+                    <i class="bi bi-house-door"></i> Home
+                </a>
+
+                <a href="#login" class="sidebar-link">
+                    <i class="bi bi-person-circle"></i> Login
+                </a>
+
+                <a href="#features" class="sidebar-link">
+                    <i class="bi bi-grid"></i> Services
+                </a>
+
+                <a href="#about" class="sidebar-link">
+                    <i class="bi bi-info-circle"></i> About Us
+                </a>
+
+                <a href="#contact" class="sidebar-link">
+                    <i class="bi bi-envelope"></i> Contact Us
+                </a>
+
+                <a href="AdminLogin.html" class="sidebar-login">
+                    <i class="bi bi-person-gear"></i> Admin Login
+                </a>
+
+                <a href="CustomerLogin.html" class="sidebar-login">
+                    <i class="bi bi-box-arrow-in-right"></i> Customer Login
+                </a>
+
+            </div>
+
+            <div class="sidebar-footer">
+                <i class="bi bi-bag-heart"></i>
+                <p>Shopping Made Simple</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+        <div class="container">
+
+            <div class="row align-items-center g-4">
+
+                <div class="col-12 col-lg-7">
+
+                    <div class="hero-label">
+                        <i class="bi bi-stars"></i>
+                        Welcome to ShopEase
+                    </div>
+
+                    <h1>
+                        A Smarter Way to <span>Shop.</span>
+                    </h1>
+
+                    <p class="hero-description">
+                        Discover a simple and convenient shopping experience.
+                        Explore products, check availability, and access your
+                        account through one easy-to-use portal.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="#login" class="hero-btn">
+                            Explore the Portal
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+
+                        <a href="#features" class="hero-secondary">
+                            Discover Features
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <div class="col-12 col-lg-5">
+
+                    <div class="hero-visual">
+
+                        <div class="visual-circle">
+                            <i class="bi bi-bag-heart"></i>
+                        </div>
+
+                        <div class="floating-card floating-one">
+                            <i class="bi bi-box-seam"></i>
+                            <div>
+                                <strong>Product Management</strong>
+                                <small>Organized inventory</small>
+                            </div>
+                        </div>
+
+                        <div class="floating-card floating-two">
+                            <i class="bi bi-cart-check"></i>
+                            <div>
+                                <strong>Easy Shopping</strong>
+                                <small>A simple shopping portal</small>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- LOGIN -->
+    <section class="page-section" id="login">
+        <div class="container">
+
+            <div class="section-heading">
+                <span class="section-tag">Get Started</span>
+                <h2>Choose Your Portal</h2>
+                <p>Select the login that matches your role to continue.</p>
+            </div>
+
+            <div class="row justify-content-center g-4">
+
+                <div class="col-12 col-md-6 col-lg-5">
+                    <div class="login-card">
+
+                        <div class="icon-box">
+                            <i class="bi bi-person-gear"></i>
+                        </div>
+
+                        <h3>Admin Portal</h3>
+
+                        <p>
+                            Manage product details, update prices,
+                            and maintain inventory records.
+                        </p>
+
+                        <a href="AdminLogin.html" class="login-btn admin-btn">
+                            Login as Admin
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-5">
+                    <div class="login-card">
+
+                        <div class="icon-box customer-icon">
+                            <i class="bi bi-person-circle"></i>
+                        </div>
+
+                        <h3>Customer Portal</h3>
+
+                        <p>
+                            Explore available products, check prices,
+                            and access the customer shopping portal.
+                        </p>
+
+                        <a href="CustomerLogin.html" class="login-btn customer-btn">
+                            Login as Customer
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="page-section" id="features">
+        <div class="container">
+
+            <div class="section-heading">
+                <span class="section-tag">What We Offer</span>
+                <h2>Designed for Simplicity</h2>
+                <p>Useful features organized into one convenient shopping system.</p>
+            </div>
+
+            <div class="row g-4">
+
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-box-seam"></i>
+                        </div>
+                        <h3>Product Management</h3>
+                        <p>Manage product information and keep inventory records organized.</p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-cart-check"></i>
+                        </div>
+                        <h3>Convenient Shopping</h3>
+                        <p>Access the customer portal to explore the available shopping features.</p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-clipboard-check"></i>
+                        </div>
+                        <h3>Stock Availability</h3>
+                        <p>Maintain product quantity information for inventory management.</p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-shield-lock"></i>
+                        </div>
+                        <h3>Separate Portals</h3>
+                        <p>Dedicated login pages for administrators and customers.</p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-database-check"></i>
+                        </div>
+                        <h3>Product Records</h3>
+                        <p>Keep product details organized through your application's database.</p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-headset"></i>
+                        </div>
+                        <h3>Customer Assistance</h3>
+                        <p>Provide a clear contact section for users who need assistance.</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="page-section" id="about">
+        <div class="container">
+
+            <div class="section-heading">
+                <span class="section-tag">Who We Are</span>
+                <h2>About ShopEase</h2>
+                <p>A simple interface for product management and online shopping.</p>
+            </div>
+
+            <div class="about-panel">
+
+                <div class="row align-items-center g-4">
+
+                    <div class="col-12 col-lg-7">
+
+                        <div class="about-content">
+
+                            <p>
+                                ShopEase is an online shopping system designed
+                                to bring product management and customer access
+                                together in one application.
+                            </p>
+
+                            <p>
+                                Administrators can manage product information
+                                and inventory, while customers can access the
+                                customer portal to explore its available features.
+                            </p>
+
+                            <p>
+                                Developed as a Java web application, ShopEase
+                                combines a clean interface with organized
+                                product management.
+                            </p>
+
+                        </div>
+
+                        <div class="row g-3 mt-3">
+
+                            <div class="col-12 col-sm-6">
+                                <div class="highlight">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    Easy-to-use interface
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-sm-6">
+                                <div class="highlight">
+                                    <i class="bi bi-box-seam"></i>
+                                    Product management
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-12 col-lg-5">
+                        <div class="about-visual">
+                            <i class="bi bi-shop-window"></i>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="page-section" id="contact">
+        <div class="container">
+
+            <div class="section-heading">
+                <span class="section-tag">Get in Touch</span>
+                <h2>Contact Us</h2>
+                <p>Use the contact details below if you need assistance.</p>
+            </div>
+
+            <div class="row justify-content-center g-4">
+
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="contact-card">
+
+                        <div class="contact-icon">
+                            <i class="bi bi-envelope-at"></i>
+                        </div>
+
+                        <h3>Email Support</h3>
+                        <p>Reach out through email for assistance.</p>
+
+                        <a href="mailto:lavanyalahari2613@gmail.com" class="contact-link">
+                            lavanyalahari2613@gmail.com
+                        </a>
+
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="contact-card">
+
+                        <div class="contact-icon">
+                            <i class="bi bi-telephone"></i>
+                        </div>
+
+                        <h3>Phone Support</h3>
+                        <p>Contact us using the phone number below.</p>
+
+                        <a href="tel:+919367802296" class="contact-link">
+                            +91 93678 02296
+                        </a>
+
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="contact-card">
+
+                        <div class="contact-icon">
+                            <i class="bi bi-geo-alt"></i>
+                        </div>
+
+                        <h3>Our Service</h3>
+                        <p>ShopEase Online Shopping System</p>
+
+                        <span class="contact-link">Customer Service</span>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+
+            <div class="row g-4">
+
+                <div class="col-12 col-md-6 col-lg-6">
+                    <div class="footer-about">
+
+                        <h2>
+                            <i class="bi bi-bag-check-fill"></i>
+                            Shop<span>Ease</span>
+                        </h2>
+
+                        <p>
+                            A Java web application for organized product
+                            management and a convenient customer portal.
+                        </p>
+
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-3 col-lg-3">
+                    <div class="footer-links">
+
+                        <h3>Quick Links</h3>
+                        <a href="#home">Home</a>
+                        <a href="#about">About Us</a>
+                        <a href="#features">Our Services</a>
+                        <a href="#contact">Contact Us</a>
+
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-3 col-lg-3">
+                    <div class="footer-links">
+
+                        <h3>Account</h3>
+                        <a href="AdminLogin.html">Admin Login</a>
+                        <a href="CustomerLogin.html">Customer Login</a>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                &copy; 2026 ShopEase. All Rights Reserved.
+                <br>
+                Designed &amp; Developed by <span>Lahari</span>.
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- FIXED MOBILE SIDEBAR NAVIGATION -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const sidebar = document.getElementById("mobileSidebar");
+
+            if (!sidebar || typeof bootstrap === "undefined") {
+                console.error("Bootstrap JavaScript did not load.");
+                return;
+            }
+
+            const sidebarLinks = sidebar.querySelectorAll(
+                'a.sidebar-link[href^="#"]'
+            );
+
+            sidebarLinks.forEach(function (link) {
+
+                link.addEventListener("click", function (event) {
+
+                    const targetId = this.getAttribute("href");
+                    const target = document.querySelector(targetId);
+
+                    if (!target) {
+                        event.preventDefault();
+                        console.error("Section not found:", targetId);
+                        return;
+                    }
+
+                    event.preventDefault();
+
+                    const offcanvas =
+                        bootstrap.Offcanvas.getOrCreateInstance(sidebar);
+
+                    sidebar.addEventListener("hidden.bs.offcanvas", function () {
+
+                        history.replaceState(null, "", targetId);
+
+                        target.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start"
+                        });
+
+                    }, { once: true });
+
+                    offcanvas.hide();
+
+                });
+
+            });
+
+        });
+    </script>
+
+</body>
+</html>

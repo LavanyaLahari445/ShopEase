@@ -1,0 +1,17 @@
+# Eclipse files
+.metadata/
+.settings/
+
+# Compiled Java files
+*.class
+build/
+target/
+
+# Server files
+Servers/
+
+# Logs
+*.log
+
+# Environment and secrets
+.env
